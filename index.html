@@ -25,13 +25,14 @@
 
         /* Active navigation link style */
         .nav-link.active {
-            border-bottom: 2px solid #854d0e; /* dark-yellow-700 */
-            color: #f0fdf4; /* green-50 */
+            border-bottom: 2px solid #854d0e;
+            color: #f0fdf4;
         }
         
         /* Hide pages by default */
         .page-content {
             display: none;
+            animation: fadeIn 0.5s ease-in;
         }
 
         /* Show the active page */
@@ -39,17 +40,66 @@
             display: block;
         }
 
+        /* Fade in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Floating hearts animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .floating-heart {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Pulse animation for countdown */
+        @keyframes pulse-subtle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .pulse-on-hover:hover {
+            animation: pulse-subtle 2s ease-in-out infinite;
+        }
+
         /* Custom colors for Tailwind */
-        .bg-wood { background-color: #5d4037; } /* A rich, dark wood */
+        .bg-wood { background-color: #5d4037; }
         .text-wood { color: #5d4037; }
-        .bg-wood-light { background-color: #8d6e63; } /* Lighter wood */
+        .bg-wood-light { background-color: #8d6e63; }
         .text-wood-light { color: #8d6e63; }
-        .bg-greenery { background-color: #2e7d32; } /* Deep green */
+        .bg-greenery { background-color: #2e7d32; }
         .text-greenery { color: #2e7d32; }
-        .bg-greenery-light { background-color: #a5d6a7; } /* Light minty green */
-        .bg-cream { background-color: #f5f5f1; } /* A soft cream */
+        .bg-greenery-light { background-color: #a5d6a7; }
+        .bg-cream { background-color: #f5f5f1; }
         .border-wood-dark { border-color: #4e342e; }
         .border-greenery-dark { border-color: #1b5e20; }
+
+        /* Gradient text effect */
+        .gradient-text {
+            background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Image hover effect */
+        .gallery-image {
+            transition: all 0.3s ease;
+        }
+
+        .gallery-image:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Timeline connector animation */
+        .timeline-line {
+            background: linear-gradient(to bottom, #8d6e63 0%, rgba(141, 110, 99, 0.3) 100%);
+        }
     </style>
 </head>
 <body class="bg-cream text-wood">
@@ -60,13 +110,13 @@
     <header class="bg-wood shadow-lg sticky top-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div>
-                <a href="#" class="text-2xl font-bold text-stone-100 font-serif">For My Future</a>
+                <a href="#" class="text-2xl font-bold text-stone-100 font-serif hover:text-green-100 transition-colors">For My Future</a>
             </div>
             <div class="space-x-4 md:space-x-6">
-                <a href="#" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-stone-200 hover:text-white" data-page="home">Home</a>
-                <a href="#" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-stone-200 hover:text-white" data-page="gallery">Gallery</a>
-                <a href="#" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-stone-200 hover:text-white" data-page="itinerary">Our Date</a>
-                <a href="#" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-stone-200 hover:text-white" data-page="wedding">Our Future</a>
+                <a href="#" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-stone-200 hover:text-white transition-all" data-page="home">Home</a>
+                <a href="#" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-stone-200 hover:text-white transition-all" data-page="gallery">Gallery</a>
+                <a href="#" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-stone-200 hover:text-white transition-all" data-page="itinerary">Our Date</a>
+                <a href="#" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-stone-200 hover:text-white transition-all" data-page="wedding">Our Future</a>
             </div>
         </nav>
     </header>
@@ -83,67 +133,75 @@
             <div class="bg-white rounded-lg shadow-xl overflow-hidden">
                 <!-- Hero Image -->
                 <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687text=Our+Story" alt="Hero Image" class="w-full h-48 md:h-80 object-cover">
-                    <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
-                        <h1 class="text-4xl md:text-6xl font-bold text-white text-center p-4">Welcome to Aiween World</h1>
+                    <img src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687" alt="Hero Image" class="w-full h-48 md:h-80 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black bg-opacity-40 flex items-center justify-center">
+                        <div class="text-center">
+                            <h1 class="text-4xl md:text-6xl font-bold text-white p-4 drop-shadow-lg">Welcome to Aiween World</h1>
+                            <p class="text-white text-lg md:text-xl mt-2 drop-shadow-md">Where every moment with you becomes a memory</p>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- About Section -->
                 <div class="p-6 md:p-10">
-                    <h2 class="text-3xl font-bold text-greenery mb-4">About Ireen ❤️</h2>
-                    <p class="text-wood-light text-lg mb-6 leading-relaxed">
-                        This is the place where I get to tell the world (or at least, you) just how amazing you are. From your incredible kindness to your brilliant mind, you make every single day better. 
-                        
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="h-1 w-12 bg-greenery rounded mr-3"></div>
+                        <h2 class="text-3xl font-bold gradient-text">About Ireen ❤️</h2>
+                        <div class="h-1 w-12 bg-greenery rounded ml-3"></div>
+                    </div>
+                    <p class="text-wood-light text-lg mb-6 leading-relaxed text-center max-w-3xl mx-auto">
+                        This is the place where I get to tell the world (or at least, you) just how amazing you are. From your incredible kindness to your brilliant mind, you make every single day better. You're not just my partner, you're my best friend, my inspiration, and my everything.
                     </p>
 
                     <!-- "Things I Love" Section -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                        <div class="bg-green-50 p-6 rounded-lg shadow-md border border-greenery-light">
-                            <h3 class="text-xl font-bold text-greenery mb-2">Your Smile</h3>
-                            <p class="text-wood-light">It brightens up my entire day, no matter what.</p>
+                        <div class="bg-green-50 p-6 rounded-lg shadow-md border border-greenery-light hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                            <div class="text-4xl mb-3 text-center">😊</div>
+                            <h3 class="text-xl font-bold text-greenery mb-2 text-center">Your Smile</h3>
+                            <p class="text-wood-light text-center">It brightens up my entire day, no matter what.</p>
                         </div>
-                        <div class="bg-green-50 p-6 rounded-lg shadow-md border border-greenery-light">
-                            <h3 class="text-xl font-bold text-greenery mb-2">Your Laugh</h3>
-                            <p class="text-wood-light">The sound of your laugh is my favorite song.</p>
+                        <div class="bg-green-50 p-6 rounded-lg shadow-md border border-greenery-light hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                            <div class="text-4xl mb-3 text-center">😄</div>
+                            <h3 class="text-xl font-bold text-greenery mb-2 text-center">Your Laugh</h3>
+                            <p class="text-wood-light text-center">The sound of your laugh is my favorite song.</p>
                         </div>
-                        <div class="bg-green-50 p-6 rounded-lg shadow-md border border-greenery-light">
-                            <h3 class="text-xl font-bold text-greenery mb-2">Your Heart</h3>
-                            <p class="text-wood-light">You care so deeply for the people around you.</p>
+                        <div class="bg-green-50 p-6 rounded-lg shadow-md border border-greenery-light hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                            <div class="text-4xl mb-3 text-center">💚</div>
+                            <h3 class="text-xl font-bold text-greenery mb-2 text-center">Your Heart</h3>
+                            <p class="text-wood-light text-center">You care so deeply for the people around you.</p>
                         </div>
                     </div>
                 </div>
                 
-                <!-- NEW: Countdown Timer Section -->
+                <!-- Countdown Timer Section -->
                 <div class="bg-cream p-6 md:p-10 border-t border-wood-light border-opacity-20 text-center">
-                    <div id="countdown-home-container" class="cursor-pointer group" title="Click to see the itinerary">
+                    <div id="countdown-home-container" class="cursor-pointer group pulse-on-hover" title="Click to see the itinerary">
                         <h3 class="text-2xl font-bold text-greenery mb-4 font-serif group-hover:text-green-700 transition-colors">Countdown to Our Next Date</h3>
                         <div class="flex justify-center space-x-2 sm:space-x-4 text-wood-light">
                             <!-- Days -->
-                            <div class="bg-white p-3 sm:p-4 rounded-lg shadow-md min-w-[60px] sm:min-w-[80px]">
+                            <div class="bg-white p-3 sm:p-4 rounded-lg shadow-md min-w-[60px] sm:min-w-[80px] group-hover:shadow-lg transition-shadow">
                                 <span id="countdown-home-days" class="text-3xl sm:text-4xl font-bold text-wood">00</span>
                                 <span class="block text-sm">Days</span>
                             </div>
                             <!-- Hours -->
-                            <div class="bg-white p-3 sm:p-4 rounded-lg shadow-md min-w-[60px] sm:min-w-[80px]">
+                            <div class="bg-white p-3 sm:p-4 rounded-lg shadow-md min-w-[60px] sm:min-w-[80px] group-hover:shadow-lg transition-shadow">
                                 <span id="countdown-home-hours" class="text-3xl sm:text-4xl font-bold text-wood">00</span>
                                 <span class="block text-sm">Hours</span>
                             </div>
                             <!-- Minutes -->
-                            <div class="bg-white p-3 sm:p-4 rounded-lg shadow-md min-w-[60px] sm:min-w-[80px]">
+                            <div class="bg-white p-3 sm:p-4 rounded-lg shadow-md min-w-[60px] sm:min-w-[80px] group-hover:shadow-lg transition-shadow">
                                 <span id="countdown-home-minutes" class="text-3xl sm:text-4xl font-bold text-wood">00</span>
                                 <span class="block text-sm">Minutes</span>
                             </div>
                             <!-- Seconds -->
-                            <div class="bg-white p-3 sm:p-4 rounded-lg shadow-md min-w-[60px] sm:min-w-[80px]">
+                            <div class="bg-white p-3 sm:p-4 rounded-lg shadow-md min-w-[60px] sm:min-w-[80px] group-hover:shadow-lg transition-shadow">
                                 <span id="countdown-home-seconds" class="text-3xl sm:text-4xl font-bold text-wood">00</span>
                                 <span class="block text-sm">Seconds</span>
                             </div>
                         </div>
-                        <p class="text-wood-light mt-4 text-sm group-hover:underline">(Click to see the plan!)</p>
+                        <p class="text-wood-light mt-4 text-sm group-hover:underline">✨ Click to see the plan! ✨</p>
                     </div>
                 </div>
-                <!-- END: Countdown Timer Section -->
 
             </div>
         </section>
@@ -152,34 +210,49 @@
           Page 2: Gallery
         -->
         <section id="page-gallery" class="page-content">
-            <h1 class="text-4xl font-bold text-greenery mb-6 text-center">Our Gallery</h1>
-            <p class="text-center text-wood-light text-lg mb-8">A few of my favorite moments with you.</p>
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold gradient-text mb-4">Our Gallery</h1>
+                <div class="h-1 w-24 bg-greenery mx-auto rounded mb-4"></div>
+                <p class="text-wood-light text-lg">A few of my favorite moments with you 📸</p>
+            </div>
 
             <!-- Image Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden gallery-image">
                     <img src="https://raw.githubusercontent.com/Ayeso38/images/d5e8c83ef106a8f0bd07d3c5cfadb3c68587482c/website%20ireen/images1.JPG" alt="Gallery Image 1" class="w-full h-64 object-cover">
-                    <div class="p-4"><p class="text-wood-light text-center">Our first boat date</p></div>
+                    <div class="p-4 bg-green-50">
+                        <p class="text-wood-light text-center font-medium">🚤 Our first boat date</p>
+                    </div>
                 </div>
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden gallery-image">
                     <img src="https://raw.githubusercontent.com/Ayeso38/images/d5e8c83ef106a8f0bd07d3c5cfadb3c68587482c/website%20ireen/images2.JPG" alt="Gallery Image 2" class="w-full h-64 object-cover">
-                    <div class="p-4"><p class="text-wood-light text-center">Our peace sign ✌🏻</p></div>
+                    <div class="p-4 bg-green-50">
+                        <p class="text-wood-light text-center font-medium">✌🏻 Our peace sign</p>
+                    </div>
                 </div>
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden gallery-image">
                     <img src="https://raw.githubusercontent.com/Ayeso38/images/d5e8c83ef106a8f0bd07d3c5cfadb3c68587482c/website%20ireen/images4.JPG" alt="Gallery Image 3" class="w-full h-64 object-cover">
-                    <div class="p-4"><p class="text-wood-light text-center">Celebrate Zahir's Birthday</p></div>
+                    <div class="p-4 bg-green-50">
+                        <p class="text-wood-light text-center font-medium">🎂 Celebrate Zahir's Birthday</p>
+                    </div>
                 </div>
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-                    <img src="https://raw.githubusercontent.com/Ayeso38/images/d5e8c83ef106a8f0bd07d3c5cfadb3c68587482c/website%20ireen/images5.JPG" alt= "Gallery Image 4" class="w-full h-64 object-cover">
-                    <div class="p-4"><p class="text-wood-light text-center">Shoooo Cuteee!!</p></div>
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden gallery-image">
+                    <img src="https://raw.githubusercontent.com/Ayeso38/images/d5e8c83ef106a8f0bd07d3c5cfadb3c68587482c/website%20ireen/images5.JPG" alt="Gallery Image 4" class="w-full h-64 object-cover">
+                    <div class="p-4 bg-green-50">
+                        <p class="text-wood-light text-center font-medium">🥰 Shoooo Cuteee!!</p>
+                    </div>
                 </div>
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden gallery-image">
                     <img src="https://raw.githubusercontent.com/Ayeso38/images/d5e8c83ef106a8f0bd07d3c5cfadb3c68587482c/website%20ireen/images6.JPG" alt="Gallery Image 5" class="w-full h-64 object-cover">
-                    <div class="p-4"><p class="text-wood-light text-center">Celebrate Aiween's Birthday</p></div>
+                    <div class="p-4 bg-green-50">
+                        <p class="text-wood-light text-center font-medium">🎉 Celebrate Aiween's Birthday</p>
+                    </div>
                 </div>
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden gallery-image">
                     <img src="https://raw.githubusercontent.com/Ayeso38/images/d5e8c83ef106a8f0bd07d3c5cfadb3c68587482c/website%20ireen/images3.JPG" alt="Gallery Image 6" class="w-full h-64 object-cover">
-                    <div class="p-4"><p class="text-wood-light text-center">I love you</p></div>
+                    <div class="p-4 bg-green-50">
+                        <p class="text-wood-light text-center font-medium">💕 I love you</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -188,13 +261,16 @@
           Page 3: Itinerary
         -->
         <section id="page-itinerary" class="page-content">
-            <h1 class="text-4xl font-bold text-greenery mb-6 text-center">Our Next Adventure</h1>
-            <p id="date-text" class="text-center text-wood-light text-lg mb-8">Here's what I have planned for our next date on [Date Here]</p>
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold gradient-text mb-4">Our Next Adventure</h1>
+                <div class="h-1 w-24 bg-greenery mx-auto rounded mb-4"></div>
+                <p id="date-text" class="text-wood-light text-lg">Here's what I have planned for our next date</p>
+            </div>
 
-            <!-- NEW: Itinerary Countdown Timer -->
-            <div class="max-w-3xl mx-auto bg-green-50 p-6 rounded-lg shadow-lg text-center mb-8 border border-greenery-light">
+            <!-- Itinerary Countdown Timer -->
+            <div class="max-w-3xl mx-auto bg-gradient-to-br from-green-50 to-white p-6 rounded-lg shadow-lg text-center mb-8 border-2 border-greenery-light">
                 <div id="countdown-itinerary-container">
-                    <h3 class="text-2xl font-bold text-greenery mb-4 font-serif">Time Left...</h3>
+                    <h3 class="text-2xl font-bold text-greenery mb-4 font-serif">Time Left Until Our Date... ⏰</h3>
                     <div class="flex justify-center space-x-2 sm:space-x-4 text-wood-light">
                         <!-- Days -->
                         <div class="bg-white p-3 sm:p-4 rounded-lg shadow-md min-w-[60px] sm:min-w-[80px]">
@@ -219,7 +295,6 @@
                     </div>
                 </div>
             </div>
-            <!-- END: Itinerary Countdown Timer -->
 
             <div class="max-w-3xl mx-auto bg-white p-6 md:p-10 rounded-lg shadow-xl border-t-4 border-greenery">
                 <!-- Timeline -->
@@ -227,100 +302,100 @@
                     
                     <div class="flex">
                         <div class="flex flex-col items-center mr-4">
-                            <div><div class="flex items-center justify-center w-10 h-10 bg-wood-light rounded-full text-white font-bold">1</div></div>
-                            <div class="w-px h-full bg-wood-light bg-opacity-30"></div>
+                            <div><div class="flex items-center justify-center w-10 h-10 bg-wood-light rounded-full text-white font-bold shadow-md">1</div></div>
+                            <div class="w-px h-full timeline-line"></div>
                         </div>
                         <div class="pb-8">
-                            <p class="text-sm text-greenery font-medium mb-1">9:00 AM</p>
+                            <p class="text-sm text-greenery font-bold mb-1">⏰ 9:00 AM</p>
                             <h3 class="text-xl font-bold text-wood mb-2">Pick You Up</h3>
-                            <p class="text-wood-light">Be ready! I'll be there with some flowers.</p>
+                            <p class="text-wood-light">Be ready! I'll be there with some flowers 💐</p>
                         </div>
                     </div>
                     
                     <div class="flex">
                         <div class="flex flex-col items-center mr-4">
-                            <div><div class="flex items-center justify-center w-10 h-10 bg-wood-light rounded-full text-white font-bold">2</div></div>
-                            <div class="w-px h-full bg-wood-light bg-opacity-30"></div>
+                            <div><div class="flex items-center justify-center w-10 h-10 bg-wood-light rounded-full text-white font-bold shadow-md">2</div></div>
+                            <div class="w-px h-full timeline-line"></div>
                         </div>
                         <div class="pb-8">
-                            <p class="text-sm text-greenery font-medium mb-1">10:30 AM</p>
+                            <p class="text-sm text-greenery font-bold mb-1">⏰ 10:30 AM</p>
                             <h3 class="text-xl font-bold text-wood mb-2">Arrive at KT</h3>
-                            <p class="text-wood-light">We're going to the placed that we have planned.</p>
+                            <p class="text-wood-light">We're going to the place that we have planned 🗺️</p>
                         </div>
                     </div>
 
                     <div class="flex">
                         <div class="flex flex-col items-center mr-4">
-                            <div><div class="flex items-center justify-center w-10 h-10 bg-wood-light rounded-full text-white font-bold">2</div></div>
-                            <div class="w-px h-full bg-wood-light bg-opacity-30"></div>
+                            <div><div class="flex items-center justify-center w-10 h-10 bg-wood-light rounded-full text-white font-bold shadow-md">3</div></div>
+                            <div class="w-px h-full timeline-line"></div>
                         </div>
                         <div class="pb-8">
-                            <p class="text-sm text-greenery font-medium mb-1">01:15 PM</p>
+                            <p class="text-sm text-greenery font-bold mb-1">⏰ 01:15 PM</p>
                             <h3 class="text-xl font-bold text-wood mb-2">Zohor Prayer</h3>
-                            <p class="text-wood-light">We are going to pray Zohor</p>
+                            <p class="text-wood-light">We are going to pray Zohor together 🕌</p>
                         </div>
                     </div>
 
                     <div class="flex">
                         <div class="flex flex-col items-center mr-4">
-                            <div><div class="flex items-center justify-center w-10 h-10 bg-wood-light rounded-full text-white font-bold">2</div></div>
-                            <div class="w-px h-full bg-wood-light bg-opacity-30"></div>
+                            <div><div class="flex items-center justify-center w-10 h-10 bg-wood-light rounded-full text-white font-bold shadow-md">4</div></div>
+                            <div class="w-px h-full timeline-line"></div>
                         </div>
                         <div class="pb-8">
-                            <p class="text-sm text-greenery font-medium mb-1">01:30 PM</p>
-                            <h3 class="text-xl font-bold text-wood mb-2">Do some shopping 👀</h3>
-                            <p class="text-wood-light">Who doesn't like shopping?</p>
+                            <p class="text-sm text-greenery font-bold mb-1">⏰ 01:30 PM</p>
+                            <h3 class="text-xl font-bold text-wood mb-2">Do Some Shopping 👀</h3>
+                            <p class="text-wood-light">Who doesn't like shopping? 🛍️</p>
                         </div>
                     </div>
 
                     <div class="flex">
                         <div class="flex flex-col items-center mr-4">
-                            <div><div class="flex items-center justify-center w-10 h-10 bg-wood-light rounded-full text-white font-bold">2</div></div>
-                            <div class="w-px h-full bg-wood-light bg-opacity-30"></div>
+                            <div><div class="flex items-center justify-center w-10 h-10 bg-wood-light rounded-full text-white font-bold shadow-md">5</div></div>
+                            <div class="w-px h-full timeline-line"></div>
                         </div>
                         <div class="pb-8">
-                            <p class="text-sm text-greenery font-medium mb-1">04:15 PM</p>
+                            <p class="text-sm text-greenery font-bold mb-1">⏰ 04:15 PM</p>
                             <h3 class="text-xl font-bold text-wood mb-2">Asar Prayer</h3>
-                            <p class="text-wood-light">We are going to pray Asar</p>
+                            <p class="text-wood-light">We are going to pray Asar together 🕌</p>
                         </div>
                     </div>
 
                     <div class="flex">
                         <div class="flex flex-col items-center mr-4">
-                            <div><div class="flex items-center justify-center w-10 h-10 bg-wood-light rounded-full text-white font-bold">2</div></div>
-                            <div class="w-px h-full bg-wood-light bg-opacity-30"></div>
+                            <div><div class="flex items-center justify-center w-10 h-10 bg-wood-light rounded-full text-white font-bold shadow-md">6</div></div>
+                            <div class="w-px h-full timeline-line"></div>
                         </div>
                         <div class="pb-8">
-                            <p class="text-sm text-greenery font-medium mb-1">05:00 PM</p>
+                            <p class="text-sm text-greenery font-bold mb-1">⏰ 05:00 PM</p>
                             <h3 class="text-xl font-bold text-wood mb-2">Eating Dessert!</h3>
-                            <p class="text-wood-light">Let's go hunt some cafe for dessert. Yeay!</p>
+                            <p class="text-wood-light">Let's go hunt some cafe for dessert. Yeay! 🍰</p>
                         </div>
                     </div>
                     
                     <div class="flex">
                         <div class="flex flex-col items-center mr-4">
-                            <div><div class="flex items-center justify-center w-10 h-10 bg-wood-light rounded-full text-white font-bold">3</div></div>
-                            <div class="w-px h-full bg-wood-light bg-opacity-30"></div>
+                            <div><div class="flex items-center justify-center w-10 h-10 bg-wood-light rounded-full text-white font-bold shadow-md">7</div></div>
+                            <div class="w-px h-full timeline-line"></div>
                         </div>
                         <div class="pb-8">
-                            <p class="text-sm text-greenery font-medium mb-1">6:30 PM</p>
+                            <p class="text-sm text-greenery font-bold mb-1">⏰ 6:30 PM</p>
                             <h3 class="text-xl font-bold text-wood mb-2">Skygazing</h3>
-                            <p class="text-wood-light">A quiet spot away from the city lights, just for us.</p>
+                            <p class="text-wood-light">A quiet spot away from the city lights, just for us ✨</p>
                         </div>
                     </div>
                     
                     <div class="flex">
                         <div class="flex flex-col items-center mr-4">
                             <div>
-                                <div class="flex items-center justify-center w-10 h-10 bg-greenery rounded-full text-white">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.s 0 00-6.364 0z" /></svg>
+                                <div class="flex items-center justify-center w-10 h-10 bg-greenery rounded-full text-white shadow-lg floating-heart">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
                                 </div>
                             </div>
                         </div>
                         <div class="pb-8">
-                            <p class="text-sm text-greenery font-medium mb-1">??:??</p>
+                            <p class="text-sm text-greenery font-bold mb-1">⏰ ??:??</p>
                             <h3 class="text-xl font-bold text-wood mb-2">...And the rest is our secret</h3>
-                            <p class="text-wood-light">The night is ours.</p>
+                            <p class="text-wood-light">The night is ours 🌙💫</p>
                         </div>
                     </div>
 
@@ -334,14 +409,18 @@
         <section id="page-wedding" class="page-content">
             <div class="bg-white rounded-lg shadow-xl overflow-hidden p-6 md:p-10 text-center">
                 <div class="max-w-2xl mx-auto">
-                    <div class="bg-wood-light bg-opacity-20 rounded-lg p-12 mb-8 border border-wood-light border-opacity-30">
-                        <h1 class="text-4xl md:text-5xl font-bold text-wood font-serif">Our Future...</h1>
+                    <div class="bg-gradient-to-br from-wood-light to-wood bg-opacity-20 rounded-lg p-12 mb-8 border-2 border-wood-light border-opacity-30 shadow-inner">
+                        <h1 class="text-4xl md:text-5xl font-bold text-white font-serif drop-shadow-lg">Our Future...</h1>
+                        <div class="mt-4 text-6xl floating-heart">💍</div>
                     </div>
-                    <h2 class="text-3xl font-bold text-greenery mb-4">In The Making</h2>
+                    <h2 class="text-3xl font-bold gradient-text mb-4">In The Making</h2>
+                    <div class="h-1 w-16 bg-greenery mx-auto rounded mb-6"></div>
                     <p class="text-wood-light text-lg leading-relaxed">
                         This page is reserved for the next chapter of our story.
                         <br><br>
                         I can't wait to plan our future, together.
+                        <br><br>
+                        <span class="text-greenery font-semibold">Every ending is a new beginning, and with you, I want all the beginnings.</span>
                     </p>
                 </div>
             </div>
@@ -352,10 +431,11 @@
     <!-- 
       Footer
     -->
-    <footer class="bg-wood mt-12 py-6">
+    <footer class="bg-wood mt-12 py-6 shadow-inner">
         <div class="container mx-auto text-center text-stone-200">
-            <p>Made with ❤️ for the one and only Aiween</p>
-            <p class="text-sm text-stone-300 mt-1">By AiZahir</p>
+            <p class="text-lg">Made with ❤️ for the one and only <span class="font-bold text-green-200">Aiween</span></p>
+            <p class="text-sm text-stone-300 mt-2">By AiZahir</p>
+            <p class="text-xs text-stone-400 mt-3">Every moment with you is a treasure 💎</p>
         </div>
     </footer>
 
@@ -365,20 +445,19 @@
     <script>
         // --- ⬇️ IMPORTANT: SET YOUR NEXT DATE HERE ⬇️ ---
         // Format: "YYYY-MM-DDTHH:MM:SS" (e.g., "2025-12-25T18:00:00")
-        // I've set a placeholder for November 12, 2025 at 6:00 PM.
         const nextDate = new Date("2025-11-09T10:00:00").getTime(); 
         // --- ⬆️ IMPORTANT: SET YOUR NEXT DATE HERE ⬆️ ---
 
         // --- to set date at title of our date page ---
-            const titleDate = new Date("2025-11-09T10:00:00");
-            const formattedDate = titleDate.toLocaleDateString("en-MY", {
-                weekday: "long",
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-            });
+        const titleDate = new Date("2025-11-09T10:00:00");
+        const formattedDate = titleDate.toLocaleDateString("en-MY", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+        });
 
-            document.getElementById("date-text").innerHTML =`Here's what I have planned for our next date on ${formattedDate}`;
+        document.getElementById("date-text").innerHTML = `Here's what I have planned for our next date on <span class="font-bold text-greenery">${formattedDate}</span> 💚`;
         
         let countdownInterval;
 
@@ -395,7 +474,7 @@
             if (!containerEl) return; // Element isn't on the page
 
             if (distance < 0) {
-                containerEl.innerHTML = `<h3 class='text-2xl font-bold text-greenery mb-4 font-serif'>${idPrefix === 'home' ? 'Enjoying our date!' : "Hope you're having fun!"}</h3>`;
+                containerEl.innerHTML = `<h3 class='text-2xl font-bold text-greenery mb-4 font-serif'>${idPrefix === 'home' ? '🎉 Enjoying our date!' : "💕 Hope you're having fun!"}</h3>`;
                 if(idPrefix === 'home') {
                     const clickNote = containerEl.querySelector('p');
                     if(clickNote) clickNote.style.display = 'none'; // Hide "(Click to see the plan!)"
